@@ -1,0 +1,38 @@
+.header {
+    background: url('http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/topbg.png') center center no-repeat;
+    width: 100%;
+    height: 115px;
+    position: fixed;
+    left:0;
+    top: -2px;
+    z-index: 9999;
+    .nav-top {
+        text-align: center;
+        height: 79px;
+        width: 100%;
+        line-height: 79px;
+        img{
+            margin-top: 25px;
+        }
+    }
+    .nav-bot {
+        height: 36px;
+        width: 100%;
+        color: #fff;
+        line-height: 36px;
+        .nav-main{
+            width: 1000px;
+            margin: 0 auto;
+            font-size: 16px;
+            li{
+                float: left;
+                padding: 0 20px;
+            }
+        }
+    }
+}
+.footer{
+    height: 400px;
+    width: 100%;
+    background: #01A3EE;
+}
