@@ -5,14 +5,14 @@
 		</div>
 		<div class="nav-bot">
 			<ul class="nav-main">
-				<li>首页</li>
-				<li>所有分类</li>
-				<li>随便逛逛</li>
-				<li>玩偶故事</li>
-				<li>关于本站</li>
-				<li>英雄帖</li>
-				<li>联系我们</li>
-				<li>小功能测试</li>
+				<router-link to='/home' tag='li'>首页</router-link>
+				<router-link to='/classify' tag='li'>所有分类</router-link>
+				<router-link to='/more' tag='li'>随便逛逛</router-link>
+				<router-link to='/classify' tag='li'>玩偶故事</router-link>
+				<router-link to='/classify' tag='li'>英雄帖</router-link>
+				<router-link to='/classify' tag='li'>联系我们</router-link>
+				<router-link to='/classify' tag='li'>小功能测试</router-link>
+				<router-link to='/classify' tag='li'>关于本站</router-link>
 			</ul>
 		</div>
 	</div>
@@ -26,11 +26,12 @@
 			return {
 				msg: 'Welcome to Your Vue.js App'
 			}
-		}
+		},
+		
 	}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    
+    	放点什么呢....thinking
   </div>
 </template>
 

@@ -129,7 +129,10 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+		mounted() {
+			window.scrollTo(0, 0);
+		},
 }
 </script>
 
@@ -138,6 +141,7 @@ export default {
 .home{
 	width: 100%;
 	margin-top: 112px;
+	overflow: hidden;
 	.home-main{
 		width: 950px;
 		margin: 0 auto;

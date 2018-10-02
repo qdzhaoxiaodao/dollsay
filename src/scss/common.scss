@@ -27,12 +27,17 @@
             li{
                 float: left;
                 padding: 0 20px;
+                cursor: pointer;
             }
         }
     }
 }
 .footer{
-    height: 400px;
+    height: 200px;
     width: 100%;
     background: #01A3EE;
+    color: #fff;
+    text-align: center;
+    line-height: 200px;
+    font-size: 40px;
 }

@@ -36,7 +36,6 @@
 </template>
 <script>
   import Vue from 'vue'
-  import $ from "jquery"
   import MyAjax from "@/function/MyAjax.js"
   export default {
     name: 'register',
@@ -50,6 +49,7 @@
     },
     mounted() {
       var that = this;
+      window.scrollTo(0, 0);
     },
     methods: {
     },

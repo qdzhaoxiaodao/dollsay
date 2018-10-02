@@ -29,6 +29,11 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  externals: {
+    vue: 'Vue',
+    'element': 'element-ui',
+    'axios':'axios',
+  },
   module: {
     rules: [
       {
