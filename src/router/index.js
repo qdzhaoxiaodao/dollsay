@@ -6,6 +6,7 @@ import index from '@/pages/index'
 import home from '@/pages/home'
 import more from '@/pages/more'
 import classify from '@/pages/classify'
+import admin from '@/pages/admin'
 
 Vue.use(Router)
 
@@ -28,6 +29,10 @@ export default new Router({
 				{
 					path: '/classify',
 					components: {header:mainHeader,main:classify,footer:mainFooter}
+				},
+				{
+					path: '/admin',
+					components: {header:mainHeader,main:admin}
 				},
 			]
 		}

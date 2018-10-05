@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-   <img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/dlb01.jpg" width="100%" alt="" />
+   <!--<img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/dlb01.jpg" width="100%" alt="" />-->
    <div class="home-main">
    	<div class="main-top">
    		<div class="main-top-top">
@@ -113,8 +113,10 @@
    				<router-link to='/more' tag='div' class="more">发现更多>>>></router-link>
    			</div>
    			<div class="main-right">
-   				<div style="width: 30px;height: 300px;font-size: 30px;margin: 100px auto;color: #000;">
-   					敬请期待.........
+   				<div style="width: 30px;height: 300px;">
+   					<a href="http://www.unicef.cn/cn/">
+   						<img src="https://tpc.googlesyndication.com/daca_images/simgad/12828719771019780790" border="0" width="300" alt="" class="img_ad">
+   					</a>
    				</div>
    			</div>
    		</div>
@@ -140,7 +142,7 @@ export default {
 <style lang="scss" scoped>
 .home{
 	width: 100%;
-	margin-top: 112px;
+	margin-top: 145px;
 	overflow: hidden;
 	.home-main{
 		width: 950px;
@@ -288,10 +290,7 @@ export default {
 			}
 			.main-right{
 				width: 300px;
-				min-height: 600px;
 				float: right;
-				background: #01A3EE;
-				opacity: 0.5;
 			}
 		}
 }
