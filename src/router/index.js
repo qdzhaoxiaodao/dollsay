@@ -7,6 +7,7 @@ import home from '@/pages/home'
 import more from '@/pages/more'
 import classify from '@/pages/classify'
 import admin from '@/pages/admin'
+import article from '@/pages/article'
 
 Vue.use(Router)
 
@@ -33,6 +34,10 @@ export default new Router({
 				{
 					path: '/admin',
 					components: {header:mainHeader,main:admin}
+				},
+				{
+					path: '/article',
+					components: {header:mainHeader,main:article,footer:mainFooter}
 				},
 			]
 		}

@@ -5,7 +5,7 @@
 					<img src="../../static/img/logo.png" title="毛绒玩偶收录第一网站" />
 				</div>
 				<div class="nav-icon">
-					 <a href="#" class="right_bt" id="activator"><span @click="show()"> </span> </a>
+					 <a href="javascript:;" class="right_bt" id="activator"><span @click="show()"> </span> </a>
 				</div>
 				<transition name="fade">
 				 <div class="box" id="box" v-if="ishide">
@@ -14,12 +14,12 @@
 						 	<div class="form_content">
 								<div class="menu_box_list">
 									<ul>
-										<li><router-link to="/home" tag='a'>Home</router-link></li>
-										<li><a href="#"><span>About</span></a></li>
-										<li><a href="#"><span>Works</span></a></li>
-										<li><a href="#"><span>Clients</span></a></li>
-										<li><a href="#"><span>Blog</span></a></li>
-										<li><a href="contact.html"><span>Contact</span></a></li>
+										<li><router-link to="/home" tag='a'>玩偶说</router-link></li>
+										<li><router-link to="/classify" tag='a'>玩偶系列</router-link></li>
+										<li><router-link to="/article" tag='a'>玩偶文章</router-link></li>
+										<li><router-link to="/home" tag='a'>关于本站</router-link></li>
+										<li><router-link to="/home" tag='a'>加入我们</router-link></li>
+										<li><router-link to="/home" tag='a'>小功能测试</router-link></li>
 										<div class="clear"> </div>
 									</ul>
 								</div>

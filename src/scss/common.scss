@@ -174,13 +174,10 @@ a.boxclose{
 }
 }
 .footer{
-    height: 200px;
+    height: 420px;
     width: 100%;
-    background: #01A3EE;
-    color: #000;
-    text-align: center;
-    line-height: 200px;
-    font-size: 40px;
+    overflow: hidden;
+    background:url(./../static/img/border.png) repeat-x 0px 0px #fff;
 }
 /*--media Quries for 480px-monitors-*/
 @media only screen and (min-width:380px) {

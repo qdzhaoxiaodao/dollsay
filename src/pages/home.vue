@@ -4,7 +4,21 @@
    <div class="home-main">
    	<div class="main-top">
    		<div class="main-top-top">
-   			<div class="main-top-top-left"></div>
+   			<div class="main-top-top-left">
+   				<h3>本网站已收录：</h3>
+   				<p>
+   					<span>300</span>
+   					<span>篇玩偶文章</span>
+   				</p>
+   				<p>
+   					<span>180</span>
+   					<span>个玩偶系列</span>
+   				</p>
+   				<p>
+   					<span>2000000</span>
+   					<span>款玩偶</span>
+   				</p>
+   			</div>
    			<div class="main-top-top-right">
    				<img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/f519_02.jpg" alt="" />
    				<img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/f519_03.jpg" alt="" />
@@ -160,6 +174,26 @@ export default {
 					float: left;
 					background: url('http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/f519_01.jpg') no-repeat;
 					background-size: 402px 402px;
+					color: #f4fff1;
+					h3{
+						margin: 40px 0 20px;
+						padding-left: 30px;
+					}
+					p{
+						text-align: center;
+						width: 100%;
+						margin-bottom: 20px;
+						span{
+							display: inline;
+						}
+						span:nth-of-type(1){
+							color: #46b6cf;
+							font-size: 40px;
+						}
+						span:nth-of-type(2){
+							font-size: 20px;
+						}
+					}
 				}
 				.main-top-top-right{
 					width: 535px;
@@ -176,18 +210,18 @@ export default {
 						float: left;
 						width: 100%;
 						height: 126px;
-						background: url('http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/F419_bg.jpg') left top no-repeat;
+						background: #f4fff1;
 					}
 					.p-text{
 						  color: #01A3EE;
-					    height: 22px;
+						  height: 126px;
 					    line-height: 20px;
 					    width: 537px;
 					    font-size: 12px;
-					    padding: 0px;
+					    padding: 5px;
 					    margin: 0px;
-					    margin-top: 5px;
 					    text-decoration: none;
+					    background: url('http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/F419_bg.jpg') left top no-repeat;
 					}
 				}
 			}
