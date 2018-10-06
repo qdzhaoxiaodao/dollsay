@@ -18,8 +18,12 @@
       type="date"
       placeholder="请选择日期" style='width: 100%;margin-top: 10px;'>
     </el-date-picker>
-		<el-input placeholder="请输入内容" v-model="name" style='margin-top: 10px;'>
-		</el-input>
+		<el-input
+  type="textarea"
+  :autosize="{ minRows: 15, maxRows: 100}"
+  placeholder="请输入内容"
+  v-model="textvalue">
+</el-input>
 	</div>
 </template>
 <script>
@@ -33,6 +37,7 @@
 				data:'',
 				oldname:'',
 				newname:'',
+				textvalue:'',
 				options: [{value: '转载'}, {value: '原创'}, {value: '转润'}],
 				value:'转载'
 			}

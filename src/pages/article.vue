@@ -89,13 +89,19 @@
 							}
 						}
 						p:nth-of-type(2) {
-							overflow: hidden;
-							text-overflow: ellipsis;
-							display: -webkit-box;
-							-webkit-box-orient:vertical;
-							-webkit-line-clamp:3;
-							line-height: 25px;
-							cursor: pointer;
+							position:relative;
+							line-height:25px;
+							height:75px;
+							overflow:hidden;
+						}
+						p:nth-of-type(2)::after {
+							content:"...";
+							font-weight:bold;
+							position:absolute;
+							bottom:0;
+							right:0;
+							padding:0 20px 1px 45px;
+							background:url(../../static/img/ellipsis_bg.png) repeat-y;
 						}
 						p:nth-of-type(2):hover {
 							color: #46B6CF;
