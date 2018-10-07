@@ -1,29 +1,54 @@
 <template>
 	<div class="admin">
-		<el-card shadow="hover">
-			文章录入系统：
-		</el-card>
-		<el-input placeholder="请输入文章标题" v-model="tittle">
-		</el-input>
-		<el-select v-model="value" placeholder="请选择" style='width: 100%;margin-top: 10px;'>
-			<el-option v-for="item in options" :key="item.value" :value="item.value">
-			</el-option>
-		</el-select>
-		<el-input placeholder="请输入原作者名字" v-model="oldname" style='margin-top: 10px;'>
-		</el-input>
-		<el-input placeholder="请输入润笔者名字" v-model="newname" style='margin-top: 10px;'>
-		</el-input>
-		<el-date-picker
-      v-model="data"
-      type="date"
-      placeholder="请选择日期" style='width: 100%;margin-top: 10px;'>
-    </el-date-picker>
-		<el-input
-  type="textarea"
-  :autosize="{ minRows: 15, maxRows: 100}"
-  placeholder="请输入内容"
-  v-model="textvalue">
-</el-input>
+		<div class="check">
+			<h3 :class="indexa==0?'bgcheck':''" @click="ischeck(0)">文章录入</h3>
+			<h3 :class="indexa==1?'bgcheck':''" @click="ischeck(1)">图片录入</h3>
+			<h3 :class="indexa==2?'bgcheck':''" @click="ischeck(2)">分类录入</h3>
+		</div>
+
+		<div class="article" v-if="ishide==0">
+			<input type="text" placeholder="请输入文章标题" v-model="tittle" />
+			<div class="options">
+				<ul>
+					<li :class="indexs==index?'bgclick':''" @click="isclick(index)" v-for="(item,index) in options" :key='index'>{{item.value}}</li>
+				</ul>
+			</div>
+			<input type="text" placeholder="请输入作者名字" v-model="oldname" />
+			<textarea autocomplete="off" placeholder="请输入内容" style="min-height: 327px; height: 327px;"></textarea>
+		</div>
+		<div class="article" v-if="ishide==1">
+			<input type="text" placeholder="请输入分类编号"/>
+			<ul class="clearfix">
+				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
+					<img :src="item">
+				</li>
+				<li style="position:relative" v-if="imgs.length>=6 ? false : true">
+					<input class="upload" @change='add_img' type="file">
+				</li>
+			</ul>
+
+		</div>
+		<div class="article" v-if="ishide==2">
+			<input type="text" placeholder="请输入分类名称"/>
+			<ul class="clearfix">
+				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
+					<img :src="item">
+				</li>
+				<li style="position:relative" v-if="imgs.length>=6 ? false : true">
+					<input class="upload" @change='add_img' type="file">
+				</li>
+			</ul>
+
+		</div>
+		<button type="button">
+			提交
+		</button>
+		<div class="article">
+			<input type="text"  placeholder="请输入文章名称进行搜索"/>
+		</div>
+		<button type="button">
+			搜索
+		</button>
 	</div>
 </template>
 <script>
@@ -32,15 +57,52 @@
 		name: 'admin',
 		data() {
 			return {
+				imgs: [],
+				imgData: {
+					accept: 'image/gif, image/jpeg, image/png, image/jpg',
+				},
+				ishide: 0,
+				indexs: 0,
+				indexa: 0,
 				name: '',
-				tittle:'',
-				data:'',
-				oldname:'',
-				newname:'',
-				textvalue:'',
-				options: [{value: '转载'}, {value: '原创'}, {value: '转润'}],
-				value:'转载'
+				tittle: '',
+				data: '',
+				oldname: '',
+				newname: '',
+				textvalue: '',
+				options: [{
+					value: '转载'
+				}, {
+					value: '原创'
+				}],
+				value: '转载'
 			}
+		},
+		methods: {
+			isclick(index) {
+				this.indexs = index;
+				this.value = this.options[index].value;
+				console.log(this.value)
+			},
+			ischeck(index) {
+				this.indexa = index;
+				this.ishide = index;
+			},
+			add_img(e) {                
+				let file = e.target.files[0];           
+		          let param = new FormData(); //创建form对象
+		          param.append('file',file,file.name);//通过append向form对象添加数据
+		          //param.append('chunk','0');//添加form表单中其他数据
+		          console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+//		          let config = {
+//		            headers:{'Content-Type':'multipart/form-data'}
+//		          };  //添加请求头
+//		          this.axios.post('http://upload.qiniu.com/',param,config)
+//		          .then(res=>{
+//		            console.log(res.data);
+//		          }) 
+			}
+
 		}
 	}
 </script>
@@ -51,5 +113,108 @@
 		margin: 0 auto;
 		margin-top: 98px;
 		padding-top: 20px;
+		.check {
+			width: 100%;
+			height: 40px;
+			background: #fff;
+			color: #606266;
+			line-height: 40px;
+			h3 {
+				width: 33.3%;
+				float: left;
+				height: 40px;
+				text-align: center;
+				cursor: pointer;
+			}
+			h3:nth-of-type(2){
+				border-left: 1px solid #e87261;
+				border-right: 1px solid #e87261;
+			}
+			.bgcheck {
+				background: #768f93;
+				color: #fff;
+			}
+		}
+		.article {
+			width: 100%;
+			.options {
+				width: 100%;
+				ul {
+					width: 100%;
+					li {
+						width: 100%;
+						height: 30px;
+						line-height: 30px;
+						background: #fff;
+						padding-left: 16px;
+						margin-bottom: 5px;
+						cursor: pointer;
+					}
+					.bgclick {
+						background: #46b5cf;
+						color: #fff;
+					}
+				}
+			}
+			input {
+				-webkit-appearance: none;
+				background-color: #fff;
+				background-image: none;
+				border-radius: 4px;
+				border: 1px solid #dcdfe6;
+				box-sizing: border-box;
+				color: #606266;
+				display: inline-block;
+				font-size: inherit;
+				height: 40px;
+				line-height: 40px;
+				outline: 0;
+				padding: 0 15px;
+				transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+				width: 100%;
+				margin-bottom: 10px;
+			}
+			textarea {
+				display: block;
+				resize: vertical;
+				padding: 5px 15px;
+				line-height: 1.5;
+				box-sizing: border-box;
+				width: 100%;
+				font-size: inherit;
+				color: #606266;
+				background-color: #fff;
+				background-image: none;
+				border: 1px solid #dcdfe6;
+				border-radius: 4px;
+				transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+			}
+		}
+		button{
+			display: inline-block;
+		    line-height: 1;
+		    white-space: nowrap;
+		    cursor: pointer;
+		    background: #fff;
+		    border: 1px solid #dcdfe6;
+		    color: #606266;
+		    -webkit-appearance: none;
+		    text-align: center;
+		    -webkit-box-sizing: border-box;
+		    box-sizing: border-box;
+		    outline: 0;
+		    margin: 0;
+		    -webkit-transition: .1s;
+		    transition: .1s;
+		    font-weight: 500;
+		    padding: 12px 40px;
+		    font-size: 14px;
+		    border-radius: 4px;
+		    margin: 20px 50%;
+		}
+		button:hover{
+			background: #409EFF;
+			color: #fff;
+		}
 	}
 </style>

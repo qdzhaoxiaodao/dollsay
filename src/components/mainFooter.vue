@@ -71,7 +71,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 p{
-	color: #46b6cf;
+	color: #2c3e50;
 	a{
 		color: #f66;
 		font-size: 20px;

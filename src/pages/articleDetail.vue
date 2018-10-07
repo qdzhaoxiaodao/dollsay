@@ -2,24 +2,30 @@
 	<div class="main">
 		<div class="article-wrap">
 			<div class="article-left">
-				<div class="articlelist">
-					<div class="list-left">
-						<h3 @click="getDetail(111)">一只丑玩偶</h3>
-						<p>
-							<span>转载</span>
-							<span>作者：</span>
-							<span>坂本鱼子酱</span>
-						</p>
-						<p>
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
-						</p>
-						<p>2018-12-12 10:10:00</p>
-					</div>
-					<div class="list-right">
-						<img src="../../static/img/img2.jpg" alt="" />
-					</div>
+				<h3>一只丑玩偶</h3>
+				<p class="linetwo">
+					<span>转载</span>
+					<span>作者:</span>
+					<span>坂本鱼子酱</span>
+					<span>2018-12-12 10:10:00</span>
+				</p>
+				<div class="detailmain">
+					<p>前两天我买了只毛绒玩具</p>
+					<p>买的时候还挺期待的。没想到买来以后一看，居然那么丑。</p>
+					<p>正面照片，头上两个角真有个性</p>
+					<img src="https://pic1.zhimg.com/80/9670c4dd3e8696455da480fa66dd81df_hd.jpg" alt="" />
+					<p>背面照片，小尾巴也真有个性</p>
+					<img src="https://pic3.zhimg.com/80/1b0debd396a96e0cd89d908d6f5896b3_hd.jpg" alt="" />
+					<p>歪一点照，稍稍好看了一点</p>
+					<img src="https://pic3.zhimg.com/80/f4f8ed3684b03101254cb81d009825d9_hd.jpg" alt="" />
+					<p>这个角度看终于好了。</p>
+					<img src="https://pic4.zhimg.com/80/48dc08f69b4950e18e2cbbd36dfc075c_hd.jpg" alt="" />
+					<p>那个啥配白富美来着？</p>
+					<img src="https://pic1.zhimg.com/80/68075c3359d713dc90d630a5b6e3ac91_hd.jpg" alt="" />
+					<p>做工也不好，有开线，还有漏的绒绒。给制作方点面子就不拍了。</p>
+					<p>居然卖那么高的价钱。</p>
+					<p>我好心疼。</p>
+					<a href="https://zhuanlan.zhihu.com/p/20560775">原文链接：https://zhuanlan.zhihu.com/p/20560775</a>
 				</div>
 			</div>
 			<div class="article-right">
@@ -46,17 +52,11 @@
 		mounted() {
 			var that = this;
 			window.scrollTo(0, 0);
-
+			console.log(that.$route.params.pid)
 		},
 		methods: {
 			getDetail(pid){
-				console.log(pid)
-				var that = this;
-				that.$router.push({
-					path:'/articleDetail',
-					name:'articleDetail',
-					params:{'pid':pid}
-				})
+				console.log(1111)
 			}
 		},
 	}
@@ -74,68 +74,43 @@
 			.article-left {
 				width: 600px;
 				float: left;
-				.articlelist {
-					width: 100%;
-					height: 175px;
-					margin-top: 20px;
-					background: #fff;
-					border-radius: 6px;
-					    box-shadow: 3px 3px 27px #7d7b7b;
-					.list-left {
-						float: left;
-						width: 425px;
-						height: 100%;
-						h3 {
-							color: #fefefe;
-							text-shadow: 0px 1px 0px #c0c0c0, 0px 2px 0px #b0b0b0, 0px 3px 0px #a0a0a0, 0px 4px 0px #909090, 0px 5px 10px rgba(0, 0, 0, .9);
-							padding-left: 20px;
-							margin-bottom: 7px;
-							cursor: pointer;
-						}
-						h3:hover{
-							color: #f7f379;
-						}
-						p {
-							padding-left: 20px;
-							margin-bottom: 10px;
-							padding-right: 20px;
-							span:nth-of-type(1) {
-								color: #f66;
-								margin-right: 10px;
-							}
-							span:nth-of-type(3) {
-								color: #ccc;
-								margin-right: 10px;
-							}
-						}
-						p:nth-of-type(2) {
-							position:relative;
-							line-height:25px;
-							height:75px;
-							overflow:hidden;
-						}
-						p:nth-of-type(2)::after {
-							content:"...";
-							font-weight:bold;
-							position:absolute;
-							bottom:0;
-							right:0;
-							padding:0 20px 1px 45px;
-							background:url(../../static/img/ellipsis_bg.png) repeat-y;
-						}
-						p:nth-of-type(3){
-							text-align: right;
-						}
+				padding-top: 30px;
+				background: #fff;
+				h3{
+					margin-bottom: 10px;
+					padding-left: 16px;
+				}
+				.linetwo{
+					line-height: 30px;
+					font-size: 14px;
+					padding-left: 48px;
+					span:nth-of-type(1){
+						color: #f66;
+						margin-right: 10px;
 					}
-					.list-right {
-						float: right;
-						width: 175px;
-						height: 100%;
-						img {
-							width: 175px;
-							height: 175px;
-							border-radius: 0 6px 6px 0;
-						}
+					span:nth-of-type(3){
+						margin-left: 10px;
+						margin-right: 10px;
+					}
+					
+				}
+				.detailmain{
+					padding-bottom: 20px;
+					p{
+						line-height: 28px;
+						text-indent: 32px;
+						font-size: 14px;
+						color: #484545;
+						padding:0 16px ;
+					}
+					img{
+						width: 100%;
+						margin: 10px 0;
+					}
+					a{
+						padding-left: 32px;
+						text-decoration: underline;
+						color: blue;
 					}
 				}
 			}

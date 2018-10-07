@@ -127,7 +127,7 @@
    				<router-link to='/more' tag='div' class="more">发现更多>>>></router-link>
    			</div>
    			<div class="main-right">
-   				<div style="width: 30px;height: 300px;">
+   				<div style="width: 300px;">
    					<a href="http://www.unicef.cn/cn/">
    						<img src="https://tpc.googlesyndication.com/daca_images/simgad/12828719771019780790" border="0" width="300" alt="" class="img_ad">
    					</a>

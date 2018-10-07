@@ -5,9 +5,6 @@ import router from './router'
 import VueLazyload from 'vue-lazyload'
 import Vue from 'vue'
 import infiniteScroll from 'vue-infinite-scroll'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUI);
 Vue.use(infiniteScroll)
 Vue.use(VueLazyload, {
 	preLoad: 1.3,

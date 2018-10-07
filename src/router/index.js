@@ -8,6 +8,7 @@ import more from '@/pages/more'
 import classify from '@/pages/classify'
 import admin from '@/pages/admin'
 import article from '@/pages/article'
+import articleDetail from '@/pages/articleDetail'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
 				{
 					path: '/article',
 					components: {header:mainHeader,main:article,footer:mainFooter}
+				},
+				{
+					path: '/articleDetail',
+					name:'articleDetail',
+					components: {header:mainHeader,main:articleDetail,footer:mainFooter}
 				},
 			]
 		}
