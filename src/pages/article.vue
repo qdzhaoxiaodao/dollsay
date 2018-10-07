@@ -46,7 +46,6 @@
 		mounted() {
 			var that = this;
 			window.scrollTo(0, 0);
-
 		},
 		methods: {
 			getDetail(pid){
