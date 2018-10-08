@@ -18,7 +18,7 @@
 										<li><router-link to="/classify" tag='a'>玩偶系列</router-link></li>
 										<li><router-link to="/article" tag='a'>玩偶文章</router-link></li>
 										<li><router-link to="/home" tag='a'>关于本站</router-link></li>
-										<li><router-link to="/home" tag='a'>加入我们</router-link></li>
+										<li><router-link to="/joinus" tag='a'>加入我们</router-link></li>
 										<li><router-link to="/home" tag='a'>小功能测试</router-link></li>
 										<div class="clear"> </div>
 									</ul>
@@ -39,7 +39,7 @@
 						<ul>
 							<li>
 								<router-link to='admin' tag='a'>
-									<img src="../../static/img/user-pic.png" title="user-name" />
+									<img src="../../static/img/lufei.jpg" title="user-name" width="43px"/>
 									<span>dollSay</span>
 								</router-link>
 							</li>

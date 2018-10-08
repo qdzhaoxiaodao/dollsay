@@ -9,6 +9,7 @@ import classify from '@/pages/classify'
 import admin from '@/pages/admin'
 import article from '@/pages/article'
 import articleDetail from '@/pages/articleDetail'
+import joinus from '@/pages/joinus'
 
 Vue.use(Router)
 
@@ -44,6 +45,11 @@ export default new Router({
 					path: '/articleDetail',
 					name:'articleDetail',
 					components: {header:mainHeader,main:articleDetail,footer:mainFooter}
+				},
+				{
+					path: '/joinus',
+					name:'joinus',
+					components: {header:mainHeader,main:joinus,footer:mainFooter}
 				},
 			]
 		}
