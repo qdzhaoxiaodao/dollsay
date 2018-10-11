@@ -6,8 +6,12 @@ var login_name = 'zygg'
 var sqlMap = {
     // 用户
     classify:{
-    	add: 'insert into wanoushuo(classify_name) values (?)',
+    	add: 'insert into classify_info(classify_name) values (?)',
     	check: 'select classify_name,classify_id from wanoushuo',
+    },
+    img:{
+    	add: 'insert into img_info(img_url,img_name,img_classify,img_classifyid) values (?,?,?,?)',
+    	check: 'select img_name,img_id from img_info',
     },
     user: {
         add: 'insert into user_info(user_name, user_pwd) values (?,?)',

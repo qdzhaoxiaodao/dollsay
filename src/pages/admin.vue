@@ -86,6 +86,7 @@
 				value: '转载',
 				id: 'uploadImage',
 				classifyname:'',
+				imgurl:''
 			}
 		},
 		methods: {
@@ -99,8 +100,11 @@
 //             	},function(err){
 //             		console.log(err)
 //             	})
-				MyAjax.axiosPost('api/user/searchCalssify', {
-	               id:''
+				MyAjax.axiosPost('api/user/addImg', {
+	               imgurl:that.imgurl,
+	               name:'bbbb',
+	               classify:'33333',
+	               classifyid:4
 				},
 	            function(res){
                		console.log(res)
@@ -119,6 +123,7 @@
 			},
 			toUpload() {
 				//oss 基本配置
+				var that = this;
 				let OSS = require('ali-oss')
 				var client = new OSS({
 					region: 'oss-cn-beijing',
@@ -138,22 +143,8 @@
 						client.put('test/'+name, file).then((results) => {
 							console.log(results.url)
 							
+							that.imgurl = results.url;
 							
-							axios.post('api/user/addUser', {
-                               name: name,
-                               pwd: pwd
-                           }).then(function(response){
-                               if (response.status == 200) {
-                                   self.errinfo = '注册成功，欢迎你，'+ name;
-                                   self.classFade = ''
-                                //    setCookie.getInfo(this.userName,this.pwd);
-                                //    setCookie.userLogin();
-                                   setTimeout("window.location.href = './#/login'",2000)
-                               } else {
-                                   self.errinfo = '注册失败，未知的错误';
-                                   self.classFade = ''
-                               }
-                           })
 							
 						}).catch((err) => {
 							console.log(err)
