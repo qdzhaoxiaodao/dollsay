@@ -17,25 +17,25 @@
 			<textarea autocomplete="off" placeholder="请输入内容" style="min-height: 327px; height: 327px;"></textarea>
 		</div>
 		<div class="article" v-if="ishide==1">
-			<input type="text" placeholder="请输入分类编号"/>
+			<input type="text" placeholder="请输入分类编号" />
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
 				</li>
 				<li style="position:relative" v-if="imgs.length>=6 ? false : true">
-					<input class="upload" @change='add_img' type="file">
+					<input :id="id" class="upload" @change='toUpload' type="file" value="上传图片">
 				</li>
 			</ul>
 
 		</div>
 		<div class="article" v-if="ishide==2">
-			<input type="text" placeholder="请输入分类名称"/>
+			<input type="text" placeholder="请输入分类名称" />
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
 				</li>
 				<li style="position:relative" v-if="imgs.length>=6 ? false : true">
-					<input class="upload" @change='add_img' type="file">
+					<input class="upload" @change='toUpload' type="file">
 				</li>
 			</ul>
 
@@ -44,14 +44,22 @@
 			提交
 		</button>
 		<div class="article">
-			<input type="text"  placeholder="请输入文章名称进行搜索"/>
+			<input type="text" placeholder="请输入文章名称进行搜索" />
 		</div>
 		<button type="button">
 			搜索
 		</button>
+		<div class="article">
+			<input type="text" placeholder="请输入分类名称" v-model="classifyname"/>
+		</div>
+		<button type="button" @click="addfenlei()">
+			添加分类
+		</button>
 	</div>
 </template>
+
 <script>
+	const OSS = require('ali-oss').Wrapper;
 	import MyAjax from "@/function/MyAjax.js"
 	export default {
 		name: 'admin',
@@ -75,10 +83,36 @@
 				}, {
 					value: '原创'
 				}],
-				value: '转载'
+				value: '转载',
+				id: 'uploadImage',
+				classifyname:'',
+				imgurl:''
 			}
 		},
+		
 		methods: {
+			addfenlei(){
+				var that = this;
+//				MyAjax.axiosPost('api/user/addClassify', {
+//	               classifyname: '猫猫'
+//				},
+//	            function(res){
+//             		console.log(res)
+//             	},function(err){
+//             		console.log(err)
+//             	})
+				MyAjax.axiosPost('api/user/addImg', {
+	               imgurl:that.imgurl,
+	               name:'bbbb',
+	               classify:'33333',
+	               classifyid:4
+				},
+	            function(res){
+               		console.log(res)
+               	},function(err){
+               		console.log(err)
+               	})
+			},
 			isclick(index) {
 				this.indexs = index;
 				this.value = this.options[index].value;
@@ -88,21 +122,37 @@
 				this.indexa = index;
 				this.ishide = index;
 			},
-			add_img(e) {                
-				let file = e.target.files[0];           
-		          let param = new FormData(); //创建form对象
-		          param.append('file',file,file.name);//通过append向form对象添加数据
-		          //param.append('chunk','0');//添加form表单中其他数据
-		          console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
-//		          let config = {
-//		            headers:{'Content-Type':'multipart/form-data'}
-//		          };  //添加请求头
-//		          this.axios.post('http://upload.qiniu.com/',param,config)
-//		          .then(res=>{
-//		            console.log(res.data);
-//		          }) 
-			}
-
+			toUpload() {
+				//oss 基本配置
+				var that = this;
+				let OSS = require('ali-oss')
+				var client = new OSS({
+					region: 'oss-cn-beijing',
+					accessKeyId: 'LTAIOMFBxvPzWjNo',
+					accessKeySecret: 'g2bhkjLspkbMkURUDArTYeiL6hhFd2',
+					bucket: 'wanoushuo',
+				})
+				//获取文件信息
+				const files = document.getElementById(this.id)
+				if(files.files) {
+					const fileLen = document.getElementById(this.id).files
+					const file = document.getElementById(this.id).files[0]
+					let consat = file.name;
+					let name = fileLen[0].name
+					for(let i = 0; i < fileLen.length; i++) {
+						const file = fileLen[i]
+						client.put('test/'+name, file).then((results) => {
+							console.log(results.url)
+							
+							that.imgurl = results.url;
+							
+							
+						}).catch((err) => {
+							console.log(err)
+						})
+					}
+				}
+			},
 		}
 	}
 </script>
@@ -126,7 +176,7 @@
 				text-align: center;
 				cursor: pointer;
 			}
-			h3:nth-of-type(2){
+			h3:nth-of-type(2) {
 				border-left: 1px solid #e87261;
 				border-right: 1px solid #e87261;
 			}
@@ -190,29 +240,29 @@
 				transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 			}
 		}
-		button{
+		button {
 			display: inline-block;
-		    line-height: 1;
-		    white-space: nowrap;
-		    cursor: pointer;
-		    background: #fff;
-		    border: 1px solid #dcdfe6;
-		    color: #606266;
-		    -webkit-appearance: none;
-		    text-align: center;
-		    -webkit-box-sizing: border-box;
-		    box-sizing: border-box;
-		    outline: 0;
-		    margin: 0;
-		    -webkit-transition: .1s;
-		    transition: .1s;
-		    font-weight: 500;
-		    padding: 12px 40px;
-		    font-size: 14px;
-		    border-radius: 4px;
-		    margin: 20px 50%;
+			line-height: 1;
+			white-space: nowrap;
+			cursor: pointer;
+			background: #fff;
+			border: 1px solid #dcdfe6;
+			color: #606266;
+			-webkit-appearance: none;
+			text-align: center;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+			outline: 0;
+			margin: 0;
+			-webkit-transition: .1s;
+			transition: .1s;
+			font-weight: 500;
+			padding: 12px 40px;
+			font-size: 14px;
+			border-radius: 4px;
+			margin: 20px 50%;
 		}
-		button:hover{
+		button:hover {
 			background: #409EFF;
 			color: #fff;
 		}
