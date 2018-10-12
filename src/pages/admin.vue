@@ -89,6 +89,7 @@
 				imgurl:''
 			}
 		},
+		
 		methods: {
 			addfenlei(){
 				var that = this;
