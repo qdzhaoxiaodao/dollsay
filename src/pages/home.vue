@@ -125,6 +125,9 @@
    					</div>
    				</div>
    				<router-link to='/more' tag='div' class="more">发现更多>>>></router-link>
+   				<div id="imgs">
+   					
+   				</div>
    			</div>
    			<div class="main-right">
    				<div style="width: 300px;">
@@ -320,6 +323,12 @@ export default {
 					font-size: 30px;
 					cursor: pointer;
 					color: #01A3EE;
+				}
+				#imgs{
+					width: 950px;
+					height: 200px;
+					margin: 0 auto;
+					background: #f66;
 				}
 			}
 			.main-right{
