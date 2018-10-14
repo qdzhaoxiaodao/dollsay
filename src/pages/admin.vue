@@ -17,13 +17,20 @@
 			<textarea autocomplete="off" placeholder="请输入内容" style="min-height: 327px; height: 327px;"></textarea>
 		</div>
 		<div class="article" v-if="ishide==1">
-			<input type="text" placeholder="请输入分类编号" />
+			 <div class="classifyhead" @click='show()'>
+			 	{{classifyvalue}}
+			 	<ul v-if="isshow">
+			 		<li @click="showlist(item)" v-for="(item,index) in classifylist" :key="index">
+			 			{{item.id}}:{{item.classify_name}}
+			 		</li>
+			 	</ul>
+			 </div>
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
 				</li>
 				<li style="position:relative" v-if="imgs.length>=6 ? false : true">
-					<input :id="id" class="upload" @change='toUpload' type="file" value="上传图片">
+					<input :id="id" multiple class="upload" @change='toUpload' type="file" value="上传图片">
 				</li>
 			</ul>
 
@@ -50,7 +57,7 @@
 			搜索
 		</button>
 		<div class="article">
-			<input type="text" placeholder="请输入分类名称" v-model="classifyname"/>
+			<input type="text" placeholder="请输入分类名称" v-model="classifyname" />
 		</div>
 		<button type="button" @click="addfenlei()">
 			添加分类
@@ -65,6 +72,9 @@
 		name: 'admin',
 		data() {
 			return {
+				classifylist:[],				
+				classifyvalue:'',
+				classifyid:'',
 				imgs: [],
 				imgData: {
 					accept: 'image/gif, image/jpeg, image/png, image/jpg',
@@ -85,33 +95,74 @@
 				}],
 				value: '转载',
 				id: 'uploadImage',
-				classifyname:'',
-				imgurl:''
+				classifyname: '',
+				imgurl: '',
+				files:'',
+				isshow:false,
 			}
 		},
-		
+		mounted(){
+			var that = this;
+			MyAjax.axiosPost('api/user/searchCalssify', {
+			},
+            function(res){
+         		console.log(res)
+         		that.classifylist = res.data;
+         		that.classifyvalue = res.data[0].classify_name;
+         		that.classifyid = res.data[0].id;
+         	},function(err){
+         		console.log(err)
+         	})
+		},
 		methods: {
-			addfenlei(){
+			addfenlei() {
 				var that = this;
-//				MyAjax.axiosPost('api/user/addClassify', {
-//	               classifyname: '猫猫'
-//				},
-//	            function(res){
-//             		console.log(res)
-//             	},function(err){
-//             		console.log(err)
-//             	})
-				MyAjax.axiosPost('api/user/addImg', {
-	               imgurl:that.imgurl,
-	               name:'bbbb',
-	               classify:'33333',
-	               classifyid:4
-				},
-	            function(res){
-               		console.log(res)
-               	},function(err){
-               		console.log(err)
-               	})
+				//				MyAjax.axiosPost('api/user/addClassify', {
+				//	               classifyname: '猫猫'
+				//				},
+				//	            function(res){
+				//             		console.log(res)
+				//             	},function(err){
+				//             		console.log(err)
+				//             	})
+				let OSS = require('ali-oss')
+				var client = new OSS({
+					region: 'oss-cn-beijing',
+					accessKeyId: 'LTAIOMFBxvPzWjNo',
+					accessKeySecret: 'g2bhkjLspkbMkURUDArTYeiL6hhFd2',
+					bucket: 'wanoushuo',
+				});
+				if(that.files.files) {
+					const fileLen = document.getElementById(this.id).files
+					console.log(fileLen)
+					const file = document.getElementById(this.id).files[0]
+					let consat = file.name;
+					let img_name = consat.split('_')[0]
+					for(let i = 0; i < fileLen.length; i++) {
+						const file = fileLen[i];
+						let name = fileLen[i].name;
+						client.put('test/' + name, file).then((results) => {
+							console.log(results.url)
+
+							//that.imgurl = results.url;
+							MyAjax.axiosPost('api/user/addImg', {
+								imgurl: results.url,
+								name: img_name,
+								classify: '33333',
+								classifyid: 4
+							},
+							function(res) {
+								console.log(res)
+							},
+							function(err) {
+								console.log(err)
+							})
+						}).catch((err) => {
+							console.log(err)
+						})
+					}
+				}
+				
 			},
 			isclick(index) {
 				this.indexs = index;
@@ -125,34 +176,19 @@
 			toUpload() {
 				//oss 基本配置
 				var that = this;
-				let OSS = require('ali-oss')
-				var client = new OSS({
-					region: 'oss-cn-beijing',
-					accessKeyId: 'LTAIOMFBxvPzWjNo',
-					accessKeySecret: 'g2bhkjLspkbMkURUDArTYeiL6hhFd2',
-					bucket: 'wanoushuo',
-				})
 				//获取文件信息
 				const files = document.getElementById(this.id)
-				if(files.files) {
-					const fileLen = document.getElementById(this.id).files
-					const file = document.getElementById(this.id).files[0]
-					let consat = file.name;
-					let name = fileLen[0].name
-					for(let i = 0; i < fileLen.length; i++) {
-						const file = fileLen[i]
-						client.put('test/'+name, file).then((results) => {
-							console.log(results.url)
-							
-							that.imgurl = results.url;
-							
-							
-						}).catch((err) => {
-							console.log(err)
-						})
-					}
-				}
+				that.files = files;
+				console.log(that.files.files)
 			},
+			show(){
+				this.isshow = !this.isshow;
+			},
+			showlist(item){
+				var that = this;
+				that.classifyvalue = item.classify_name;
+         		that.classifyid = item.id;
+			}
 		}
 	}
 </script>
@@ -187,6 +223,48 @@
 		}
 		.article {
 			width: 100%;
+			.classifyhead{
+				-webkit-appearance: none;
+			    background-color: #fff;
+			    background-image: none;
+			    border-radius: 4px;
+			    border: 1px solid #dcdfe6;
+			    -webkit-box-sizing: border-box;
+			    box-sizing: border-box;
+			    color: #606266;
+			    display: inline-block;
+			    font-size: inherit;
+			    height: 40px;
+			    line-height: 40px;
+			    outline: 0;
+			    padding: 0 15px;
+			    -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+			    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+			    width: 100%;
+			    margin-bottom: 10px;
+			   	position:relative;
+			   	text-align:center;
+			   	cursor:pointer;
+			    ul{
+			    	width: 100%;
+			    	height: 400px;
+			    	border: 1px solid #46b5cf;
+			    	position: absolute;
+			    	left: 0;
+				    top: 40px;
+				    z-index: 44;
+				    background: #fff;
+				    overflow: auto;
+				    li{
+				    	width: 100%;
+				    	height: 30px;
+				    	line-height: 30px;
+				    	text-align: center;
+				    	border-bottom: 1px solid #e87261;
+				    	cursor:pointer;
+				    }
+			    }
+			}
 			.options {
 				width: 100%;
 				ul {
