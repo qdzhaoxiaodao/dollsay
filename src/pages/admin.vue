@@ -15,9 +15,13 @@
 			</div>
 			<input type="text" placeholder="请输入作者名字" v-model="oldname" />
 			<textarea autocomplete="off" placeholder="请输入内容" style="min-height: 327px; height: 327px;"></textarea>
+			<button type="button">
+				提交
+			</button>
 		</div>
 		<div class="article" v-if="ishide==1">
 			<input type="text" placeholder="请输入分类编号" />
+			<input type="text" placeholder="请输图片名称" />
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
@@ -26,7 +30,9 @@
 					<input :id="id" class="upload" @change='toUpload' type="file" value="上传图片">
 				</li>
 			</ul>
-
+			<button type="button">
+				提交
+			</button>
 		</div>
 		<div class="article" v-if="ishide==2">
 			<input type="text" placeholder="请输入分类名称" />
@@ -38,17 +44,17 @@
 					<input class="upload" @change='toUpload' type="file">
 				</li>
 			</ul>
-
+				<button type="button">
+					提交
+				</button>
 		</div>
-		<button type="button">
-			提交
-		</button>
 		<div class="article">
 			<input type="text" placeholder="请输入文章名称进行搜索" />
+			<button type="button">
+				搜索
+			</button>
 		</div>
-		<button type="button">
-			搜索
-		</button>
+		
 		<div class="article">
 			<input type="text" placeholder="请输入分类名称" v-model="classifyname"/>
 		</div>
