@@ -20,7 +20,7 @@
 			<div style="height: 0;padding: 0; margin: 0 10px;"></div>
 		</div>
 		<div class="wangzhan">
-			<p>
+			<!--<p>
 				<span>前端,ui设计by</span>
 				<span>-----前端工程师<a href="http://www.tuneng.xyz">赵小神</a></span>
 			</p>
@@ -31,7 +31,7 @@
 			<p>
 				<span>本网站由</span>
 				<span>-----学姐之家ceo<a href="http://www.cube6.top">张阳</a>独家赞助</span>
-			</p>
+			</p>-->
 			<p>
 				<span>备案号：</span>
 				<span><a href="http://www.miitbeian.gov.cn">豫ICP备17041677号</a></span>

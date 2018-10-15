@@ -7,7 +7,7 @@ var sqlMap = {
     // 用户
     classify:{
     	add: 'insert into classify_info(classify_name) values (?)',
-    	check: 'select classify_name,classify_id from wanoushuo',
+    	check: 'select classify_name,id from classify_info',
     },
     img:{
     	add: 'insert into img_info(img_url,img_name,img_classify,img_classifyid) values (?,?,?,?)',

@@ -41,12 +41,10 @@
    		</div>-->
 			</div>
 		</div>
-		<div class="news">
-
-		</div>
+		<div class="news"></div>
 		<div class="main-content">
 			<div class="main-left">
-				<div class="tablist" v-for="item in 6">
+				<div class="tablist" v-for="item in 3">
 					<div class="img">
 						<img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/f519_02.jpg" alt="" />
 					</div>
@@ -59,7 +57,20 @@
 						<p>2018-12-12 12:24:00</p>
 					</div>
 				</div>
-				<router-link to='/more' tag='div' class="more">发现更多>>>></router-link>
+				<router-link to='/more' tag='div' class="more">发现更多>>></router-link>
+				<div class="news"></div>
+			<div id="imgs">
+				<div class="list" v-for="item in 9">
+					<img src="https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg" alt="" />
+					<div class="name">
+						小熊小熊
+					</div>
+				</div>
+				<div class="list" style="height: 0;border: 0;"></div>
+				<div class="list" style="height: 0;border: 0;"></div>
+				<div class="list" style="height: 0;border: 0;"></div>
+				</div>
+				<router-link to='/more' tag='div' class="more">发现更多>>></router-link>
 			</div>
 		</div>
 	</div>
@@ -254,11 +265,53 @@
 				}
 				.more {
 					width: 200px;
-					margin: 30px auto;
-					text-align: center;
-					font-size: 30px;
-					cursor: pointer;
-					color: #01A3EE;
+			    font-size: 14px;
+			    cursor: pointer;
+			    color: #01A3EE;
+			    float: right;
+			    text-align: right;
+			    margin-bottom: 20px;
+				}
+				#imgs{
+					width: 950px;
+					margin: 0 auto;
+					justify-content: space-between;
+					display: flex;
+					flex-wrap: wrap;
+					.list{
+						width: 300px;
+						height: 300px;
+						background-color: #fff;
+				    border: 1px solid #dedede;
+				    border-radius: 2px;
+				    -moz-border-radius: 2px;
+				    -webkit-border-radius: 2px;
+				    cursor: pointer;
+				    border-radius: .2em;
+				    margin: 5px;
+				    position: relative;
+				    img{
+				    	width: 100%;
+				    	height: 100%;
+				    	position: absolute;
+				    	left: 0;
+				    	top: 0;
+				    }
+				    .name{
+				    	width: 300px;
+				    	height: 300px;
+				    	position: absolute;
+				    	color: #fff;
+				    	background: rgba(118, 143, 147, 0.5);
+				    	display: none;
+				    	font-size: 20px;
+				    	text-align: center;
+				    	line-height: 300px;
+				    }
+					}
+					.list:hover .name{
+						display: block;
+					}
 				}
 			}
 		}

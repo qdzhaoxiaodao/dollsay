@@ -23,7 +23,7 @@ var jsonWrite = function(res, ret) {
 router.use('/searchCalssify', (req, res) => {
     var sql = $sql.classify.check;
     var params = req.body;
-    pool.query(sql, [params.id], function(error, results, fields) {
+    pool.query(sql, [params.name,params.id], function(error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(res,results)
