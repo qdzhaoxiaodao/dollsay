@@ -167,7 +167,6 @@
 						})
 					}
 				}
-				
 			},
 			isclick(index) {
 				this.indexs = index;
