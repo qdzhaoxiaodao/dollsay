@@ -15,7 +15,7 @@
 			</div>
 			<input type="text" placeholder="请输入作者名字" v-model="oldname" />
 			<input type="text" placeholder="请输入文章简单描述" v-model="dec" />
-			<input type="text" placeholder="请输入列表页展示图片地址" v-model="listimg"/>
+			<input type="text" placeholder="请输入列表页展示图片地址" v-model="listimg" />
 			<input type="text" placeholder="请输入时间，格式2018-2-3 00:00:00" v-model="time" />
 			<textarea autocomplete="off" placeholder="" style="min-height: 327px; height: 327px;" v-model="textarea">
 <p>文字</p>
@@ -87,10 +87,10 @@
 		name: 'admin',
 		data() {
 			return {
-				textarea:'',
-				dec:'',
-				time:'',
-				listimg:'',
+				textarea: '',
+				dec: '',
+				time: '',
+				listimg: '',
 				classifylist: [],
 				classifyvalue: '',
 				classifyid: '',
@@ -134,56 +134,48 @@
 				})
 		},
 		methods: {
-			
+
 			//添加文章
-			addArticle(){
+			addArticle() {
 				var that = this;
-	function CurentTime()
-    { 
-        var now = new Date();
-        
-        var year = now.getFullYear();       //年
-        var month = now.getMonth() + 1;     //月
-        var day = now.getDate();            //日
-        
-        var hh = now.getHours();            //时
-        var mm = now.getMinutes();          //分
-        
-        var clock = year + "-";
-        
-        if(month < 10)
-            clock += "0";
-        
-        clock += month + "-";
-        
-        if(day < 10)
-            clock += "0";
-            
-        clock += day + " ";
-        
-        if(hh < 10)
-            clock += "0";
-            
-        clock += hh + ":";
-        if (mm < 10) clock += '0'; 
-        clock += mm; 
-        return(clock); 
-    }
+
+				function CurentTime() {
+					var now = new Date();
+
+					var year = now.getFullYear(); //年
+					var month = now.getMonth() + 1; //月
+					var day = now.getDate(); //日
+					var hh = now.getHours(); //时
+					var mm = now.getMinutes(); //分
+					var clock = year + "-";
+					if(month < 10)
+						clock += "0";
+					clock += month + "-";
+					if(day < 10)
+						clock += "0";
+					clock += day + " ";
+					if(hh < 10)
+						clock += "0";
+					clock += hh + ":";
+					if(mm < 10) clock += '0';
+					clock += mm;
+					return(clock);
+				}
 				MyAjax.axiosPost('api/user/addArticle', {
-					title:that.title,
-					type:'转载',
-					author:'baitxstx--知乎用户',
-					time:CurentTime(),
-					headimg:'https://pic1.zhimg.com/80/v2-6a24747c5767a49af21f2d55bd7cde8a_hd.jpg',
-					dec:'第一次拿起钩针是在毕业前，为了给大学导师钩织一条披肩，名字叫“贵妇人”。虽然成品看起来并不是像名字看起来那么富态，但还是有些许的复古吧。',
-					content:that.textarea
-				},
-				function(res) {
-					console.log(res)
-				},
-				function(err) {
-					console.log(err)
-				})
+						title: that.title,
+						type: '转载',
+						author: 'baitxstx--知乎用户',
+						time: CurentTime(),
+						headimg: 'https://pic1.zhimg.com/80/v2-6a24747c5767a49af21f2d55bd7cde8a_hd.jpg',
+						dec: '第一次拿起钩针是在毕业前，为了给大学导师钩织一条披肩，名字叫“贵妇人”。虽然成品看起来并不是像名字看起来那么富态，但还是有些许的复古吧。',
+						content: that.textarea
+					},
+					function(res) {
+						console.log(res)
+					},
+					function(err) {
+						console.log(err)
+					})
 			},
 			addfenlei() {
 				var that = this;

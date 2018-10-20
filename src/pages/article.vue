@@ -2,33 +2,30 @@
 	<div class="main">
 		<div class="article-wrap">
 			<div class="article-left">
-				<div class="articlelist">
+				<div class="articlelist" v-for="(item,index) in articleList" :key="index">
 					<div class="list-left">
-						<h3 @click="getDetail(111)">一只丑玩偶</h3>
+						<h3 @click="getDetail(item.id)">{{item.article_title}}</h3>
 						<p>
-							<span>转载</span>
+							<span>{{item.article_type}}</span>
 							<span>作者：</span>
-							<span>坂本鱼子酱</span>
+							<span>{{item.article_author}}</span>
 						</p>
 						<p>
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
-							前两天我买了只毛绒玩具，买的时候还挺期待的，没想到买来以后一看，居然那么丑。
+							{{item.article_dec}}
 						</p>
-						<p>2018-12-12 10:10:00</p>
+						<p>{{item.article_time}}</p>
 					</div>
 					<div class="list-right">
-						<img src="../../static/img/img2.jpg" alt="" />
+						<img :src="item.article_headimg" alt="" />
 					</div>
 				</div>
 			</div>
-			<div class="article-right">
+			<!--<div class="article-right">
 				<div style="width: 300px;">
    					<a href="http://www.unicef.cn/cn/">
-   						<img src="https://tpc.googlesyndication.com/daca_images/simgad/12828719771019780790" border="0" width="300" alt="" class="img_ad">
    					</a>
    				</div>
-			</div>
+			</div>-->
 		</div>
 	</div>
 </template>
@@ -39,13 +36,29 @@
 		name: 'register',
 		data() {
 			return {
-				imglist: ['https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg'],
+				articleList:[],
 			}
 		},
 		updated() {},
 		mounted() {
 			var that = this;
 			window.scrollTo(0, 0);
+			MyAjax.axiosPost('api/user/getArticle', {
+						id:'',
+						title: '',
+						type: '',
+						author: '',
+						time: '',
+						pageSize:20,
+						pageNum:1,
+			},
+				function(res) {
+					console.log(res)
+					that.articleList = res.data;
+				},
+				function(err) {
+					console.log(err)
+				})
 		},
 		methods: {
 			getDetail(pid){
@@ -71,7 +84,7 @@
 			min-height: 800px;
 			margin: 0 auto;
 			.article-left {
-				width: 600px;
+				width: 100%;
 				float: left;
 				.articlelist {
 					width: 100%;
@@ -82,21 +95,20 @@
 					    box-shadow: 3px 3px 27px #7d7b7b;
 					.list-left {
 						float: left;
-						width: 425px;
+						width: 760px;
 						height: 100%;
 						h3 {
-							color: #fefefe;
-							text-shadow: 0px 1px 0px #c0c0c0, 0px 2px 0px #b0b0b0, 0px 3px 0px #a0a0a0, 0px 4px 0px #909090, 0px 5px 10px rgba(0, 0, 0, .9);
 							padding-left: 20px;
 							margin-bottom: 7px;
 							cursor: pointer;
+							margin-top: 10px;
 						}
 						h3:hover{
-							color: #f7f379;
+							color: #f66;
 						}
 						p {
 							padding-left: 20px;
-							margin-bottom: 10px;
+							margin-bottom: 4px;
 							padding-right: 20px;
 							span:nth-of-type(1) {
 								color: #f66;
@@ -113,7 +125,7 @@
 							height:75px;
 							overflow:hidden;
 						}
-						p:nth-of-type(2)::after {
+						/*p:nth-of-type(2)::after {
 							content:"...";
 							font-weight:bold;
 							position:absolute;
@@ -121,7 +133,7 @@
 							right:0;
 							padding:0 20px 1px 45px;
 							background:url(../../static/img/ellipsis_bg.png) repeat-y;
-						}
+						}*/
 						p:nth-of-type(3){
 							text-align: right;
 						}

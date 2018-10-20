@@ -1,12 +1,10 @@
-// var getName = require('../src/js/getLoginName.js');
-// var name = getName.getName();
-// console.log('get' + name);
 var login_name = 'zygg'
+	console.log('参数',)
     // sql语句
 var sqlMap = {
 	article:{
     	add: 'insert into article_info(article_title,article_type,article_author,article_time,article_headimg,article_dec,article_content) values (?,?,?,?,?,?,?)',
-    	check: 'select classify_name,id from classify_info',
+    	select: 'select * from article_info limit ?,?',
     },
     // 用户
     classify:{

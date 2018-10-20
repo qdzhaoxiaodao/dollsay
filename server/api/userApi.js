@@ -18,6 +18,22 @@ var jsonWrite = function(res, ret) {
         res.json(ret);
     }
 };
+//获取文章
+router.use('/getArticle', (req, res) => {
+    var sql = $sql.article.select;
+    var params = req.body;
+    console.log(params);
+    var pageSize = params.pageSize;
+    var pageNum = params.pageNum;
+    var ini = (pageNum-1)*pageSize;
+    pool.query(sql, [ini,pageSize], function(error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results)
+            jsonWrite(res, results);
+        }
+    })
+});
 //添加文章
 router.use('/addArticle', (req, res) => {
     var sql = $sql.article.add;
