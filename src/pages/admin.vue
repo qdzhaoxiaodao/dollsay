@@ -7,15 +7,22 @@
 		</div>
 
 		<div class="article" v-if="ishide==0">
-			<input type="text" placeholder="请输入文章标题" v-model="tittle" />
+			<input type="text" placeholder="请输入文章标题" v-model="title" />
 			<div class="options">
 				<ul>
 					<li :class="indexs==index?'bgclick':''" @click="isclick(index)" v-for="(item,index) in options" :key='index'>{{item.value}}</li>
 				</ul>
 			</div>
 			<input type="text" placeholder="请输入作者名字" v-model="oldname" />
-			<textarea autocomplete="off" placeholder="请输入内容" style="min-height: 327px; height: 327px;"></textarea>
-			<button type="button">
+			<input type="text" placeholder="请输入文章简单描述" v-model="dec" />
+			<input type="text" placeholder="请输入列表页展示图片地址" v-model="listimg"/>
+			<input type="text" placeholder="请输入时间，格式2018-2-3 00:00:00" v-model="time" />
+			<textarea autocomplete="off" placeholder="" style="min-height: 327px; height: 327px;" v-model="textarea">
+<p>文字</p>
+<img src="" alt="" />图片地址模板
+<a href="">图片地址</a>
+			</textarea>
+			<button type="button" @click="addArticle()">
 				提交
 			</button>
 		</div>
@@ -54,7 +61,10 @@
 					提交
 				</button>
 		</div>
-		<div class="article">
+		<input type="date" />
+		<input type="datetime" />
+		<input type="datetime-local" name="" id="" value="" />
+		<!--<div class="article">
 			<input type="text" placeholder="请输入文章名称进行搜索" />
 			<button type="button">
 				搜索
@@ -66,7 +76,7 @@
 		</div>
 		<button type="button" @click="addfenlei()">
 			添加分类
-		</button>
+		</button>-->
 	</div>
 </template>
 
@@ -77,6 +87,10 @@
 		name: 'admin',
 		data() {
 			return {
+				textarea:'',
+				dec:'',
+				time:'',
+				listimg:'',
 				classifylist: [],
 				classifyvalue: '',
 				classifyid: '',
@@ -88,7 +102,7 @@
 				indexs: 0,
 				indexa: 0,
 				name: '',
-				tittle: '',
+				title: '',
 				data: '',
 				oldname: '',
 				newname: '',
@@ -120,6 +134,57 @@
 				})
 		},
 		methods: {
+			
+			//添加文章
+			addArticle(){
+				var that = this;
+	function CurentTime()
+    { 
+        var now = new Date();
+        
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+        
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+        
+        var clock = year + "-";
+        
+        if(month < 10)
+            clock += "0";
+        
+        clock += month + "-";
+        
+        if(day < 10)
+            clock += "0";
+            
+        clock += day + " ";
+        
+        if(hh < 10)
+            clock += "0";
+            
+        clock += hh + ":";
+        if (mm < 10) clock += '0'; 
+        clock += mm; 
+        return(clock); 
+    }
+				MyAjax.axiosPost('api/user/addArticle', {
+					title:that.title,
+					type:'转载',
+					author:'baitxstx--知乎用户',
+					time:CurentTime(),
+					headimg:'https://pic1.zhimg.com/80/v2-6a24747c5767a49af21f2d55bd7cde8a_hd.jpg',
+					dec:'第一次拿起钩针是在毕业前，为了给大学导师钩织一条披肩，名字叫“贵妇人”。虽然成品看起来并不是像名字看起来那么富态，但还是有些许的复古吧。',
+					content:that.textarea
+				},
+				function(res) {
+					console.log(res)
+				},
+				function(err) {
+					console.log(err)
+				})
+			},
 			addfenlei() {
 				var that = this;
 				//				MyAjax.axiosPost('api/user/addClassify', {

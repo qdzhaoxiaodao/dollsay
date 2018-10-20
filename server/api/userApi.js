@@ -18,7 +18,19 @@ var jsonWrite = function(res, ret) {
         res.json(ret);
     }
 };
-
+//添加文章
+router.use('/addArticle', (req, res) => {
+    var sql = $sql.article.add;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, [params.title,params.type,params.author,params.time,params.headimg,params.dec,params.content], function(error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results)
+            jsonWrite(res, results);
+        }
+    })
+});
 //查询分类
 router.use('/searchCalssify', (req, res) => {
     var sql = $sql.classify.check;

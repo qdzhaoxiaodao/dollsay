@@ -4,6 +4,10 @@
 var login_name = 'zygg'
     // sql语句
 var sqlMap = {
+	article:{
+    	add: 'insert into article_info(article_title,article_type,article_author,article_time,article_headimg,article_dec,article_content) values (?,?,?,?,?,?,?)',
+    	check: 'select classify_name,id from classify_info',
+    },
     // 用户
     classify:{
     	add: 'insert into classify_info(classify_name) values (?)',
