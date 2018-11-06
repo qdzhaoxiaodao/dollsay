@@ -42,7 +42,7 @@ export default new Router({
 					components: {header:mainHeader,main:article,footer:mainFooter}
 				},
 				{
-					path: '/articleDetail',
+					path: '/articleDetail/:id',
 					name:'articleDetail',
 					components: {header:mainHeader,main:articleDetail,footer:mainFooter}
 				},

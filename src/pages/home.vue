@@ -44,26 +44,26 @@
 		<div class="news"></div>
 		<div class="main-content">
 			<div class="main-left">
-				<div class="tablist" v-for="item in 3">
+				<div class="tablist" v-for="(item,index) in articleList" :key='index'>
 					<div class="img">
-						<img src="http://wanoushuo.oss-cn-beijing.aliyuncs.com/static/f519_02.jpg" alt="" />
+						<img :src="item.article_headimg" alt="" />
 					</div>
 					<div class="introduce">
-						<p>第1234567期：《玩具熊的五夜后宫系列》</p>
-						<p>《玩具熊的五夜后宫 Five Nights at Freddy》玩具熊的五夜后宫是独立的点击式生存恐怖电视游戏和由Scott Cawthon开发的系列的第一部分。 它于2014年8月9日在Desura上首次发布，并于2014年8月18日在Steam上发布。玩家的目标是在Freddy's Fazbears Pizza披萨店店里生存五晚，同时避免被机械玩偶捕捉和杀死，并通过店铺的闭路监控系统来监控机械玩偶们。 “白天，这是一个快乐的地方，但你白天不在这里。 你只有夜晚。”</p>
+						<router-link :to="{path:'/articleDetail/'+item.id}" tag='p'>{{item.article_title}}</router-link>
+						<p>{{item.article_dec}}</p>
 					</div>
 					<div class="xilie">
-						<p>标签：<span>新系列</span></p>
-						<p>2018-12-12 12:24:00</p>
+						<p>标签：<span>{{item.article_type}}</span></p>
+						<p>{{item.article_time}}</p>
 					</div>
 				</div>
 				<router-link to='/more' tag='div' class="more">发现更多>>></router-link>
 				<div class="news"></div>
 			<div id="imgs">
-				<div class="list" v-for="item in 9">
-					<img src="https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg" alt="" />
+				<div class="list" v-for="(item,index) in imgList" :key='index'>
+					<img :src="item.img_url" alt="" />
 					<div class="name">
-						小熊小熊
+						{{item.img_name}}
 					</div>
 				</div>
 				<div class="list" style="height: 0;border: 0;"></div>
@@ -82,11 +82,43 @@
 		name: 'HelloWorld',
 		data() {
 			return {
-				msg: 'Welcome to Your Vue.js App'
+				articleList:[],
+				imgList:[]
 			}
 		},
 		mounted() {
 			window.scrollTo(0, 0);
+			var that = this;
+			MyAjax.axiosPost('api/user/getArticle', {
+				id:'',
+				title: '',
+				type: '',
+				author: '',
+				time: '',
+				pageSize:6,
+				pageNum:1,
+			},
+				function(res) {
+				console.log(res)
+				for(var i = 0;i<res.data.length;i++){
+					res.data[i].article_time = res.data[i].article_time.slice(0,10);
+				}
+				that.articleList = res.data;
+			},
+			function(err) {
+				console.log(err)
+			})
+			MyAjax.axiosPost('api/user/searchImg', {
+				pageSize:9,
+				pageNum:1,
+			},
+				function(res) {
+				console.log(res)
+				that.imgList= res.data;
+			},
+			function(err) {
+				console.log(err)
+			})
 		},
 	}
 </script>
@@ -221,6 +253,7 @@
 							margin-top: 20px;
 							margin-bottom: 30px;
 							text-align: right;
+							cursor: pointer;
 						}
 						p:nth-of-type(2) {
 							height: 90px;
@@ -234,7 +267,6 @@
 							display: -webkit-box;
 							-webkit-box-orient: vertical;
 							-webkit-line-clamp: 3;
-							cursor: pointer;
 						}
 					}
 					.xilie {
@@ -255,8 +287,7 @@
 						}
 						p:nth-of-type(2) {
 							font-size: 18px;
-							text-align: left;
-							padding-right: 12px;
+							text-align: center;
 						}
 					}
 				}

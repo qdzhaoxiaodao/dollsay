@@ -2,18 +2,21 @@ var login_name = 'zygg'
 	console.log('参数',)
     // sql语句
 var sqlMap = {
+	//文章
 	article:{
     	add: 'insert into article_info(article_title,article_type,article_author,article_time,article_headimg,article_dec,article_content) values (?,?,?,?,?,?,?)',
     	select: 'select * from article_info limit ?,?',
+    	selectDetial:'select * from article_info where id = ?',
     },
-    // 用户
+    //分类
     classify:{
     	add: 'insert into classify_info(classify_name) values (?)',
-    	check: 'select classify_name,id from classify_info',
+    	check: 'select * from classify_info',
     },
+    //图片
     img:{
     	add: 'insert into img_info(img_url,img_name,img_classify,img_classifyid) values (?,?,?,?)',
-    	check: 'select img_name,img_id from img_info',
+    	check: 'select * from img_info  limit ?,?',
     },
     user: {
         add: 'insert into user_info(user_name, user_pwd) values (?,?)',

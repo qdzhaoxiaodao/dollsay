@@ -34,6 +34,18 @@ router.use('/getArticle', (req, res) => {
         }
     })
 });
+router.use('/getArticleDetail', (req, res) => {
+    var sql = $sql.article.selectDetial;
+    var params = req.body;
+    console.log(params);
+    pool.query(sql, [params.id], function(error, results, fields) {
+        if (error) throw error;
+        if (results) {
+            console.log(results)
+            jsonWrite(res, results);
+        }
+    })
+});
 //添加文章
 router.use('/addArticle', (req, res) => {
     var sql = $sql.article.add;
@@ -76,7 +88,10 @@ router.use('/addClassify', (req, res) => {
 router.use('/searchImg', (req, res) => {
     var sql = $sql.img.check;
     var params = req.body;
-    pool.query(sql, [params.imgurl,params.name], function(error, results, fields) {
+    var pageSize = params.pageSize;
+    var pageNum = params.pageNum;
+    var ini = (pageNum-1)*pageSize;
+    pool.query(sql, [ini,pageSize], function(error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(res,results)
