@@ -5,18 +5,19 @@ var sqlMap = {
 	//文章
 	article:{
     	add: 'insert into article_info(article_title,article_type,article_author,article_time,article_headimg,article_dec,article_content) values (?,?,?,?,?,?,?)',
-    	select: 'select * from article_info limit ?,?',
+    	select: 'select * from article_info order by article_time desc limit ?,?',
     	selectDetial:'select * from article_info where id = ?',
     },
     //分类
     classify:{
-    	add: 'insert into classify_info(classify_name) values (?)',
-    	check: 'select * from classify_info',
+    	add: 'insert into classify_info(classify_name,classify_img,classify_dec,classify_likenum,classify_type) values (?,?,?,?,?)',
+    	check: 'select * from classify_info order by id desc limit ?,?',
     },
     //图片
     img:{
     	add: 'insert into img_info(img_url,img_name,img_classify,img_classifyid) values (?,?,?,?)',
-    	check: 'select * from img_info  limit ?,?',
+    	check: 'select * from img_info order by id desc limit ?,?',
+    	checkone: 'select * from img_info where img_name = ? order by id desc limit ?,?',
     },
     user: {
         add: 'insert into user_info(user_name, user_pwd) values (?,?)',

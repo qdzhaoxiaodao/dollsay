@@ -70,7 +70,7 @@
 				<div class="list" style="height: 0;border: 0;"></div>
 				<div class="list" style="height: 0;border: 0;"></div>
 				</div>
-				<router-link to='/more' tag='div' class="more">发现更多>>></router-link>
+				<router-link to='/more/all' tag='div' class="more">发现更多>>></router-link>
 			</div>
 		</div>
 	</div>
@@ -109,6 +109,7 @@
 				console.log(err)
 			})
 			MyAjax.axiosPost('api/user/searchImg', {
+				name:'all',
 				pageSize:9,
 				pageNum:1,
 			},

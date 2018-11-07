@@ -47,30 +47,31 @@
 		data() {
 			return {
 				msg: 'Welcome to Your Vue.js App',
-				lianjie: [{
-						name: '玩偶说',
-						src: '../../static/img/logo.png',
-						href: 'http://www.tuneng.xyz'
-					},
+				lianjie: [
 					{
 						name: '4wBLOG',
 						src: '../../static/img/4wblog.png',
 						href: 'http://www.cube6.top'
 					},
 					{
-						name: '百度一下',
-						src: 'https://www.baidu.com/img/baidu_jgylogo3.gif',
-						href: 'http://www.baidu.com'
+						name: '九刀厨',
+						src: '../../static/img/9badao.png',
+						href: 'https://www.9badao.com'
 					},
 					{
-						name: '玩偶说',
-						src: '../../static/img/logo.png',
-						href: 'http://www.tuneng.xyz'
+						name: '阿里云',
+						src: '../../static/img/aliyun.png',
+						href: 'https://www.aliyun.com/'
 					},
 					{
-						name: '4wBLOG',
-						src: '../../static/img/4wblog.png',
-						href: 'http://www.cube6.top'
+						name: '腾讯网',
+						src: '../../static/img/tengxun.png',
+						href: 'https://www.qq.com'
+					},
+					{
+						name: '天猫',
+						src: '../../static/img/tianmao.png',
+						href: 'https://www.tmall.com/'
 					},
 					{
 						name: '百度一下',

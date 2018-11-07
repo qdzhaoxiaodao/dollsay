@@ -12,16 +12,15 @@
 			<ul id="tiles">
 				<li v-for="(item,index) in imglist" :key='index' class="imglist">
 					<div style="width: 278px;height: 278px;">
-						<img v-lazy="item">
+						<img v-lazy="item.img_url">
 					</div>
 					<!--<img :src="item" width="278">-->
 					<div class="post-info">
 						<div class="post-basic-info">
-							<h3><a href="#">玩具熊的五夜后宫</a></h3>
-							<span><a href="#"><label> </label>游戏</a></span>
-							<p>《玩具熊的五夜后宫》（Five Nights at Freddy's）是一款由animdude开发制作的惊悚冒险类游戏，已于2014年8月16日发行。</p>
+							<h3><a href="#">{{item.img_name}}</a></h3>
+							<span><a href="#"><label> </label>{{item.img_classify}}</a></span>
 						</div>
-						<div class="post-info-rate-share">
+						<!--<div class="post-info-rate-share">
 							<div class="rateit">
 								<span> </span>
 							</div>
@@ -29,7 +28,7 @@
 								<span> </span>
 							</div>
 							<div class="clear"> </div>
-						</div>
+						</div>-->
 					</div>
 				</li>
 				<li style="height: 0;border: 0;"></li>
@@ -42,8 +41,8 @@
 				<li style="height: 0;border: 0;"></li>
 				<li style="height: 0;border: 0;"></li>
 			</ul>
-			<div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
- 				<span>加载中</span>
+			<div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10" style="text-align: center;">
+ 				<img src="../../static/img/xiaohuangya.gif" alt="" style="width: 100px;"/>
 			</div>
 		</div>
 	</div>
@@ -55,9 +54,11 @@
 		name: 'register',
 		data() {
 			return {
+				name:'',
 				busy: false,
+				pageNum:1,
 				imgHeight: '',
-				imglist: ['https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg'],
+				imglist:[],
 				imglist1: ['https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/192/811/8543118291_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/660/331/8543133066_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/842/721/8543127248_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/404/001/8543100404_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/051/265/8562562150_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/494/933/8576339494_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/492/121/8543121294_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/341/753/8576357143_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/582/655/8562556285_55792555.jpg', 'https://cbu01.alicdn.com/img/ibank/2018/779/813/8576318977_55792555.jpg'],
 			}
 		},
@@ -65,17 +66,38 @@
 		mounted() {
 			var that = this;
 			window.scrollTo(0, 0);
-
+			console.log(that.$route.params.name);
+			that.imgcncat = function(){
+				MyAjax.axiosPost('api/user/searchImg', {
+					name:that.$route.params.name,
+					pageSize:8,
+					pageNum:that.pageNum
+				},function(res) {
+					console.log(res)
+					if(res.data.length != 0){
+						that.imglist= that.imglist.concat(res.data);
+					}
+				});
+			}
+			that.imgcncat();
 		},
 		methods: {
 			loadMore() {
 				var that = this;
 				this.busy = true;
 				//官方示例中延迟了1秒，防止滚动条滚动时的频繁请求数据
-				setTimeout(() => {
-					that.imglist = that.imglist.concat(that.imglist1);
-					this.busy = false;
-				}, 1000);
+				if(that.imglist.length !=0){
+					setTimeout(() => {
+						that.pageNum++
+						console.log(that.imglist.length%8)
+						if(that.imglist.length%8 == 0){
+							that.imgcncat();
+							this.busy = false;
+						}else{
+							this.busy = true;
+						}
+					}, 1000);
+				}
 			}
 		},
 	}

@@ -26,7 +26,7 @@ export default new Router({
 					components: {header:mainHeader,main:home,footer:mainFooter}
 				},
 				{
-					path: '/more',
+					path: '/more/:name',
 					components: {header:mainHeader,main:more,footer:mainFooter}
 				},
 				{

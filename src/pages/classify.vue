@@ -6,19 +6,19 @@
         <ul class="tablist">
         	<div class="classfy">按种类分：</div>
         	<li>
-        		<span v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.name}}</span>
+						<router-link :to="{path:'/more/'+item.classify_name}" tag='span' v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.classify_name}}</router-link>
         		<span v-for='(item,index) in 30' style="height: 0;" :key='index'></span>
         	</li>
-        	<div class="classfy">按品牌分：</div>
+        	<!--<div class="classfy">按品牌分：</div>
         	<li>
-        		<span v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.name}}</span>
+        		<span v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.classify_name}}</span>
         		<span v-for='(item,index) in 30' style="height: 0;" :key='index'></span>
         	</li>
         	<div class="classfy">按国家分：</div>
         	<li>
-        		<span v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.name}}</span>
+        		<span v-bind:style="{ color: '#'+Math.floor(Math.random()*0xffffff).toString(16)}" v-for='(item,index) in classfylist' :key='index'>{{item.classify_name}}</span>
         		<span v-for='(item,index) in 30' style="height: 0;" :key='index'></span>
-        	</li>
+        	</li>-->
         	
         </ul>
     </div>
@@ -32,7 +32,7 @@
     data() {
       return {
         imgHeight: '',
-        classfylist:[{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼ss得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶a'},{id:1,name:'aa熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶asda'},{id:1,name:'熊asda'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊assd'},{id:1,name:'独角ss兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔sss子'},{id:1,name:'香烟sss酒瓶'},{id:1,name:'香烟s酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟酒瓶'},{id:1,name:'香烟酒瓶'},{id:1,name:'熊'},{id:1,name:'独角兽'},{id:1,name:'小猪'},{id:1,name:'狐狸'},{id:1,name:'火烈鸟'},{id:1,name:'彼得兔'},{id:1,name:'兔子'},{id:1,name:'香烟ss酒瓶'},{id:1,name:'香烟sss酒瓶'},{id:1,name:'熊'},{id:1,name:'独角sss兽'},{id:1,name:'小猪'},],
+        classfylist:[],
       }
     },
     updated() {
@@ -40,6 +40,17 @@
     mounted() {
       var that = this;
       window.scrollTo(0, 0);
+      MyAjax.axiosPost('api/user/searchCalssify', {
+						pageSize:2000,
+						pageNum:1,
+			},
+				function(res) {
+					console.log(res)
+					that.classfylist = res.data;
+				},
+				function(err) {
+					console.log(err)
+				})
     },
     methods: {
     },

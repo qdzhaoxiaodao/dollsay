@@ -16,17 +16,17 @@
 			<input type="text" placeholder="请输入作者名字" v-model="oldname" />
 			<input type="text" placeholder="请输入文章简单描述" v-model="dec" />
 			<input type="text" placeholder="请输入列表页展示图片地址" v-model="listimg" />
-			<input type="text" placeholder="请输入时间，格式2018-2-3 00:00:00" v-model="time" />
-			<textarea autocomplete="off" placeholder="" style="min-height: 327px; height: 327px;" v-model="textarea">
-<p>文字</p>
-<img src="" alt="" />图片地址模板
-<a href="">图片地址</a>
+			<textarea autocomplete="off" placeholder="" style="min-height: 327px; height: 327px;" v-model="textareas">
+			<p>文字</p>
+			<img src="" alt="" />图片地址模板
+			<a href="">图片地址</a>
 			</textarea>
 			<button type="button" @click="addArticle()">
-				提交
+				文章提交
 			</button>
 		</div>
 		<div class="article" v-if="ishide==1">
+			<p style="padding: 10px 0;">请选择图片分类</p>
 			<div class="classifyhead" @click='show()'>
 				{{classifyvalue}}
 				<ul v-if="isshow">
@@ -35,6 +35,7 @@
 					</li>
 				</ul>
 			</div>
+			<p>请选择图片(图片命名格式'兔兔_00001.png')</p>
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
@@ -43,12 +44,15 @@
 					<input :id="id" multiple class="upload" @change='toUpload' type="file" value="上传图片">
 				</li>
 			</ul>
-			<button type="button">
-				提交
+			<button type="button" @click="addimg()">
+				图片提交
 			</button>
 		</div>
 		<div class="article" v-if="ishide==2">
 			<input type="text" placeholder="请输入分类名称" />
+			<input type="text" placeholder="请输入分类描述" />
+			<input type="text" placeholder="请输入分类类型" />
+			<p>请选择分类图片</p>
 			<ul class="clearfix">
 				<li v-if="imgs.length>0" v-for='(item ,index ) in imgs'>
 					<img :src="item">
@@ -57,13 +61,13 @@
 					<input class="upload" @change='toUpload' type="file">
 				</li>
 			</ul>
-			<button type="button">
-					提交
+			<button type="button" @click="addClassify()">
+					分类提交
 				</button>
 		</div>
-		<input type="date" />
+		<!--<input type="date" />
 		<input type="datetime" />
-		<input type="datetime-local" name="" id="" value="" />
+		<input type="datetime-local" name="" id="" value="" />-->
 		<!--<div class="article">
 			<input type="text" placeholder="请输入文章名称进行搜索" />
 			<button type="button">
@@ -87,7 +91,7 @@
 		name: 'admin',
 		data() {
 			return {
-				textarea: '',
+				textareas: '',
 				dec: '',
 				time: '',
 				listimg: '',
@@ -121,72 +125,62 @@
 			}
 		},
 		mounted() {
-			var that = this;
-			MyAjax.axiosPost('api/user/searchCalssify', {},
-				function(res) {
-					console.log(res)
-					that.classifylist = res.data;
-					that.classifyvalue = res.data[0].classify_name;
-					that.classifyid = res.data[0].id;
-				},
-				function(err) {
-					console.log(err)
-				})
 		},
 		methods: {
-
 			//添加文章
 			addArticle() {
 				var that = this;
-
+				console.log(CurentTime())
 				function CurentTime() {
 					var now = new Date();
-
 					var year = now.getFullYear(); //年
 					var month = now.getMonth() + 1; //月
 					var day = now.getDate(); //日
 					var hh = now.getHours(); //时
 					var mm = now.getMinutes(); //分
+					var ss = now.getSeconds() //分
+					console.log(ss)
 					var clock = year + "-";
 					if(month < 10)
 						clock += "0";
 					clock += month + "-";
+					
 					if(day < 10)
 						clock += "0";
 					clock += day + " ";
+					
 					if(hh < 10)
 						clock += "0";
 					clock += hh + ":";
-					if(mm < 10) clock += '0';
-					clock += mm;
+					
+					if(mm < 10)
+						clock += '0';
+					clock += mm+ ":";
+					
+					if(ss < 10)
+						clock += '0';
+					clock += ss;
 					return(clock);
 				}
 				MyAjax.axiosPost('api/user/addArticle', {
-						title: that.title,
-						type: '转载',
-						author: 'baitxstx--知乎用户',
-						time: CurentTime(),
-						headimg: 'https://pic1.zhimg.com/80/v2-6a24747c5767a49af21f2d55bd7cde8a_hd.jpg',
-						dec: '第一次拿起钩针是在毕业前，为了给大学导师钩织一条披肩，名字叫“贵妇人”。虽然成品看起来并不是像名字看起来那么富态，但还是有些许的复古吧。',
-						content: that.textarea
-					},
-					function(res) {
-						console.log(res)
-					},
-					function(err) {
-						console.log(err)
-					})
+					title: that.title,
+					type: that.value,
+					author: that.oldname,
+					time: CurentTime(),
+					headimg: that.listimg,
+					dec: that.dec,
+					content: that.textareas
+				},
+				function(res) {
+					console.log(res)
+				},
+				function(err) {
+					console.log(err)
+				})
 			},
-			addfenlei() {
+			//添加图片
+			addimg() {
 				var that = this;
-				//				MyAjax.axiosPost('api/user/addClassify', {
-				//	               classifyname: '猫猫'
-				//				},
-				//	            function(res){
-				//             		console.log(res)
-				//             	},function(err){
-				//             		console.log(err)
-				//             	})
 				let OSS = require('ali-oss')
 				var client = new OSS({
 					region: 'oss-cn-beijing',
@@ -194,6 +188,7 @@
 					accessKeySecret: 'g2bhkjLspkbMkURUDArTYeiL6hhFd2',
 					bucket: 'wanoushuo',
 				});
+				console.log(that.files.files)
 				if(that.files.files) {
 					const fileLen = document.getElementById(this.id).files
 					console.log(fileLen)
@@ -203,15 +198,14 @@
 					for(let i = 0; i < fileLen.length; i++) {
 						const file = fileLen[i];
 						let name = fileLen[i].name;
-						client.put('test/' + name, file).then((results) => {
+						client.put('allImg/' + name, file).then((results) => {
 							console.log(results.url)
-
 							//that.imgurl = results.url;
 							MyAjax.axiosPost('api/user/addImg', {
 									imgurl: results.url,
 									name: img_name,
-									classify: '33333',
-									classifyid: 4
+									classify: '22222',
+									classifyid: 5
 								},
 								function(res) {
 									console.log(res)
@@ -224,6 +218,62 @@
 						})
 					}
 				}
+			},
+			//添加分类
+			addClassify() {
+				var that = this;
+				var arr = ['猫猫','狗狗','魂斗罗','五夜后宫','精灵','神奇宝贝','熊本熊','小黄鸭','十二生肖','泰迪熊'];
+				for(var i = 0;i<arr.length;i++){
+					MyAjax.axiosPost('api/user/addClassify', {
+						classify_img:'https://wanoushuo.oss-cn-beijing.aliyuncs.com/test/%E5%85%94%E5%85%94_000003.png',
+						classify_dec:'这是一个寂寞的天，下着有些伤心的雨。',
+						classify_likenum:1,
+						classify_type:'电影',
+		               	classify_name: arr[i],
+					},
+		            function(res){
+	             		console.log(res)
+	             	},function(err){
+	             		console.log(err)
+	             	})
+				}
+//				let OSS = require('ali-oss')
+//				var client = new OSS({
+//					region: 'oss-cn-beijing',
+//					accessKeyId: 'LTAIOMFBxvPzWjNo',
+//					accessKeySecret: 'g2bhkjLspkbMkURUDArTYeiL6hhFd2',
+//					bucket: 'wanoushuo',
+//				});
+//				console.log(that.files.files)
+//				if(that.files.files) {
+//					const fileLen = document.getElementById(this.id).files
+//					console.log(fileLen)
+//					const file = document.getElementById(this.id).files[0]
+//					let consat = file.name;
+//					let img_name = consat.split('_')[0]
+//					for(let i = 0; i < fileLen.length; i++) {
+//						const file = fileLen[i];
+//						let name = fileLen[i].name;
+//						client.put('allImg/' + name, file).then((results) => {
+//							console.log(results.url)
+//							//that.imgurl = results.url;
+//							MyAjax.axiosPost('api/user/addImg', {
+//									imgurl: results.url,
+//									name: img_name,
+//									classify: '22222',
+//									classifyid: 5
+//								},
+//								function(res) {
+//									console.log(res)
+//								},
+//								function(err) {
+//									console.log(err)
+//								})
+//						}).catch((err) => {
+//							console.log(err)
+//						})
+//					}
+//				}
 			},
 			isclick(index) {
 				this.indexs = index;
@@ -396,10 +446,10 @@
 			-webkit-transition: .1s;
 			transition: .1s;
 			font-weight: 500;
-			padding: 12px 40px;
-			font-size: 14px;
+			padding: 12px 420px;
+			font-size: 27px;
 			border-radius: 4px;
-			margin: 20px 50%;
+			margin: 20px 0;
 		}
 		button:hover {
 			background: #409EFF;

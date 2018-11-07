@@ -34,6 +34,7 @@ router.use('/getArticle', (req, res) => {
         }
     })
 });
+//查询文章详情
 router.use('/getArticleDetail', (req, res) => {
     var sql = $sql.article.selectDetial;
     var params = req.body;
@@ -63,7 +64,10 @@ router.use('/addArticle', (req, res) => {
 router.use('/searchCalssify', (req, res) => {
     var sql = $sql.classify.check;
     var params = req.body;
-    pool.query(sql, [params.name,params.id], function(error, results, fields) {
+     var pageSize = params.pageSize;
+    var pageNum = params.pageNum;
+    var ini = (pageNum-1)*pageSize;
+    pool.query(sql, [ini,pageSize], function(error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(res,results)
@@ -76,7 +80,7 @@ router.use('/addClassify', (req, res) => {
     var sql = $sql.classify.add;
     var params = req.body;
     console.log(params);
-    pool.query(sql, [params.classifyname], function(error, results, fields) {
+    pool.query(sql, [params.classify_name,params.classify_img,params.classify_dec,params.classify_likenum,params.classify_type], function(error, results, fields) {
         if (error) throw error;
         if (results) {
             console.log(results)
@@ -86,18 +90,33 @@ router.use('/addClassify', (req, res) => {
 });
 //查询图片
 router.use('/searchImg', (req, res) => {
-    var sql = $sql.img.check;
-    var params = req.body;
-    var pageSize = params.pageSize;
-    var pageNum = params.pageNum;
-    var ini = (pageNum-1)*pageSize;
-    pool.query(sql, [ini,pageSize], function(error, results, fields) {
-        if (error) throw error;
-        if (results) {
-            console.log(res,results)
-            jsonWrite(res, results);
-        }
-    })
+	var params = req.body;
+	if(params.name == 'all'){
+		var sql = $sql.img.check;
+	    var pageSize = params.pageSize;
+	    var pageNum = params.pageNum;
+	    var ini = (pageNum-1)*pageSize;
+	    pool.query(sql, [ini,pageSize], function(error, results, fields) {
+	        if (error) throw error;
+	        if (results) {
+	            console.log(res,results)
+	            jsonWrite(res, results);
+	        }
+	    })
+	}else{
+		var sql = $sql.img.checkone;
+	    var pageSize = params.pageSize;
+	    var pageNum = params.pageNum;
+	    var ini = (pageNum-1)*pageSize;
+	    pool.query(sql, [params.name,ini,pageSize], function(error, results, fields) {
+	        if (error) throw error;
+	        if (results) {
+	            console.log(res,results)
+	            jsonWrite(res, results);
+	        }
+	    })
+	}
+    
 });
 //添加图片
 router.use('/addImg', (req, res) => {
