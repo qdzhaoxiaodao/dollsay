@@ -125,6 +125,18 @@
 			}
 		},
 		mounted() {
+			var that = this;
+			MyAjax.axiosPost('api/user/searchCalssify', {
+						pageSize:2000,
+						pageNum:1,
+			},
+				function(res) {
+					console.log(res)
+					that.classifylist = res.data;
+				},
+				function(err) {
+					console.log(err)
+				})
 		},
 		methods: {
 			//添加文章
@@ -197,15 +209,15 @@
 					let img_name = consat.split('_')[0]
 					for(let i = 0; i < fileLen.length; i++) {
 						const file = fileLen[i];
-						let name = fileLen[i].name;
+						let name = fileLen[i].name.split('_')[0];
+						console.log(name)
 						client.put('allImg/' + name, file).then((results) => {
 							console.log(results.url)
-							//that.imgurl = results.url;
 							MyAjax.axiosPost('api/user/addImg', {
 									imgurl: results.url,
-									name: img_name,
-									classify: '22222',
-									classifyid: 5
+									name: name,
+									classify: that.classifyvalue,
+									classifyid: that.classifyid
 								},
 								function(res) {
 									console.log(res)

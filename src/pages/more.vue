@@ -86,18 +86,17 @@
 				var that = this;
 				this.busy = true;
 				//官方示例中延迟了1秒，防止滚动条滚动时的频繁请求数据
-				if(that.imglist.length !=0){
-					setTimeout(() => {
-						that.pageNum++
-						console.log(that.imglist.length%8)
-						if(that.imglist.length%8 == 0){
-							that.imgcncat();
-							this.busy = false;
-						}else{
-							this.busy = true;
-						}
-					}, 1000);
-				}
+				console.log(that.imglist.length)
+				setTimeout(() => {
+					that.pageNum++
+					console.log(that.imglist.length%8)
+					if(that.imglist.length%8 == 0){
+						that.imgcncat();
+						this.busy = false;
+					}else{
+						this.busy = true;
+					}
+				}, 1000);
 			}
 		},
 	}
