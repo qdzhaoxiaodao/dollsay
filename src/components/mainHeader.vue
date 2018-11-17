@@ -19,7 +19,7 @@
 										<li><router-link to="/article" tag='a'>玩偶文章</router-link></li>
 										<li><router-link to="/home" tag='a'>关于本站</router-link></li>
 										<li><router-link to="/joinus" tag='a'>加入我们</router-link></li>
-										<li><router-link to="/home" tag='a'>小功能测试</router-link></li>
+										<li><router-link to="/test" tag='a'>小功能测试</router-link></li>
 										<div class="clear"> </div>
 									</ul>
 								</div>
