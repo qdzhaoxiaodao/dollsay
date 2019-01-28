@@ -2,7 +2,7 @@
 	<div class="header">
 				<div class="wrap">
 				<div class="logo">
-					<img src="../../static/img/logo.png" title="毛绒玩偶收录第一网站" />
+					<img src="../../static/img/logotwo.png" height="80px" title="毛绒玩偶收录第一网站" />
 				</div>
 				<div class="nav-icon">
 					 <a href="javascript:;" class="right_bt" id="activator"><span @click="show()"> </span> </a>

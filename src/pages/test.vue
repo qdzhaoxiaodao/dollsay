@@ -37,9 +37,9 @@
 			window.scrollTo(0, 0);
 			//倒计时
 			//在页面加载完后立即执行多个函数完美方案。
-			that.addloadEvent(showTime);
-			that.addloadEvent(day);
-			that.addloadEvent(tb);
+			showTime();
+			day();
+			tb();
 			//天时秒分倒计时
 			function tb() {
 				var myDate = new Date(); //获取当前时间
@@ -89,7 +89,6 @@
 			};
 			//拖拽，可吸附
 			//drag("box", true)
-
 			function drag(id, adsorb) {
 				var drag;
 				var x, y;
@@ -146,20 +145,6 @@
 			};
 		},
 		methods: {
-			addloadEvent(func) {
-				var oldonload = window.onload;
-				if(typeof window.onload != "function") {
-					window.onload = func;
-				} else {
-					window.onload = function() {
-						if(oldonload) {
-							oldonload();
-						}
-						func();
-					}
-				}
-			}
-		},
 		mousedown(event) {
 			var startx = event.x;
 			var starty = event.y;
@@ -182,6 +167,7 @@
 			this.is_moving = false;
 		}
 	}
+		}
 </script>
 <style scoped lang="scss">
 	.main {

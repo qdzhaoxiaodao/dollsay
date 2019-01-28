@@ -1,7 +1,7 @@
 .header {
     background: url(./../static/img/border.png) repeat-x 0px 0px #fff;
     width: 100%;
-    padding: 24px 0 19px;
+    padding: 5px 0 5px;
     border-bottom: 1px solid rgba(214, 213, 212, 0.64);
     position: fixed;
     width: 100%;
@@ -23,6 +23,7 @@
         float: left;
         margin: 0.6% 2% 0 8%;
         width: 4.55%;
+        margin-top: 38px;
     }
     .nav-icon a span {
         width: 48px;
@@ -35,6 +36,7 @@
         width: 46%;
         position: relative;
         margin-left: 2em;
+        margin-top: 27px;
     }
     .top-searchbar input[type="text"] {
         margin-top: 0.55em;
@@ -143,7 +145,7 @@
     .userinfo {
         float: right;
         width: 15%;
-        margin-top: 0.3em;
+        margin-top: 24px;
     }
     .user ul li {
         display: inline-block;

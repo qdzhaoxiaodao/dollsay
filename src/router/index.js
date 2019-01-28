@@ -11,6 +11,7 @@ import article from '@/pages/article'
 import articleDetail from '@/pages/articleDetail'
 import joinus from '@/pages/joinus'
 import test from '@/pages/test'
+import sole from '@/pages/sole'
 
 Vue.use(Router)
 
@@ -18,6 +19,10 @@ export default new Router({
 	routes: [{
 			path: '/',
 			redirect: '/home'
+		},
+		{
+			path: '/sole',
+			component: sole
 		},
 		{
 			path: '/index',
